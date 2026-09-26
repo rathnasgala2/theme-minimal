@@ -4,6 +4,8 @@ All notable changes to `@rathnasgala2/theme-minimal` are documented here.
 
 ## Unreleased
 
+## 2.1.0 - 2026-09-26
+
 ### Changed (2026-09-25 third review pass: `@rathnasgala2/theme-tooling` ae2ee49)
 
 - CI: the `@rathnasgala2/theme-tooling` sibling checkout pin moves to
