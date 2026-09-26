@@ -240,6 +240,15 @@
     padding-top: var(--gala-space-4);
   }
 
+  [data-gala-publication-root] [data-gala-slot="article-end"]::before {
+    content: "";
+    display: inline-block;
+    width: 0.25rem;
+    height: 0.25rem;
+    margin: 0 var(--gala-space-2) 0 0;
+    background-color: var(--gala-color-text-muted);
+  }
+
   [data-gala-publication-root] [data-gala-page-kind="error"] {
     color: var(--gala-color-danger);
   }
