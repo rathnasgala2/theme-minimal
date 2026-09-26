@@ -2,8 +2,8 @@
   "schemaId": "urn:gala:schema:theme-contract:2.0.0",
   "schemaVersion": "2.0.0",
   "themeId": "minimal",
-  "package": "@rathnasgala2/theme-minimal@2.0.0",
-  "contractVersion": "2.0.0",
+  "package": "@rathnasgala2/theme-minimal@2.1.0",
+  "contractVersion": "2.1.0",
   "templateRange": "^2.0.0",
   "stylesheets": ["tokens.css", "components.css", "print.css"],
   "cssLayers": ["gala-tokens", "gala-components", "gala-print"],
@@ -39,7 +39,6 @@
     "landmark-footer",
     "landmark-header",
     "landmark-main",
-    "landmark-main-content",
     "landmark-navigation",
     "media-image",
     "page-error",
@@ -65,8 +64,8 @@
     {
       "key": "color-accent",
       "type": "color",
-      "light": "#2b2b2b",
-      "dark": "#e6e6e6"
+      "light": "#6e6e6e",
+      "dark": "#808080"
     },
     {
       "key": "color-border",
@@ -101,20 +100,20 @@
     {
       "key": "color-focus",
       "type": "color",
-      "light": "#2b2b2b",
+      "light": "#b96900",
       "dark": "#ffd166"
     },
     {
       "key": "color-link",
       "type": "color",
-      "light": "#2b2b2b",
+      "light": "#2c6f97",
       "dark": "#e6e6e6"
     },
     {
       "key": "color-link-visited",
       "type": "color",
-      "light": "#5f5f5f",
-      "dark": "#b8b8b8"
+      "light": "#4a6f83",
+      "dark": "#95b0bc"
     },
     {
       "key": "color-on-accent",
@@ -143,8 +142,8 @@
     {
       "key": "color-surface-raised",
       "type": "color",
-      "light": "#f2f2f2",
-      "dark": "#1c1c1c"
+      "light": "#dcdcdc",
+      "dark": "#323232"
     },
     {
       "key": "color-text",
@@ -167,8 +166,8 @@
     {
       "key": "content-measure",
       "type": "length",
-      "light": "38rem",
-      "dark": "38rem"
+      "light": "44rem",
+      "dark": "44rem"
     },
     { "key": "focus-width", "type": "length", "light": "2px", "dark": "2px" },
     {
@@ -189,39 +188,29 @@
       "light": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
       "dark": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
     },
-    {
-      "key": "radius-medium",
-      "type": "length",
-      "light": "0.125rem",
-      "dark": "0.125rem"
-    },
+    { "key": "radius-medium", "type": "length", "light": "0", "dark": "0" },
     { "key": "radius-small", "type": "length", "light": "0", "dark": "0" },
-    { "key": "space-1", "type": "length", "light": "0.2rem", "dark": "0.2rem" },
-    { "key": "space-2", "type": "length", "light": "0.4rem", "dark": "0.4rem" },
-    { "key": "space-3", "type": "length", "light": "0.6rem", "dark": "0.6rem" },
     {
-      "key": "space-4",
+      "key": "space-1",
       "type": "length",
-      "light": "0.875rem",
-      "dark": "0.875rem"
+      "light": "0.25rem",
+      "dark": "0.25rem"
     },
+    { "key": "space-2", "type": "length", "light": "0.5rem", "dark": "0.5rem" },
     {
-      "key": "space-6",
+      "key": "space-3",
       "type": "length",
-      "light": "1.25rem",
-      "dark": "1.25rem"
+      "light": "0.75rem",
+      "dark": "0.75rem"
     },
-    {
-      "key": "space-8",
-      "type": "length",
-      "light": "1.75rem",
-      "dark": "1.75rem"
-    },
+    { "key": "space-4", "type": "length", "light": "1rem", "dark": "1rem" },
+    { "key": "space-6", "type": "length", "light": "1.5rem", "dark": "1.5rem" },
+    { "key": "space-8", "type": "length", "light": "2rem", "dark": "2rem" },
     {
       "key": "weight-heading",
       "type": "font-weight",
-      "light": "600",
-      "dark": "600"
+      "light": "500",
+      "dark": "500"
     },
     {
       "key": "weight-medium",
@@ -247,22 +236,22 @@
     {
       "path": "tokens.css",
       "mediaType": "text/css",
-      "byteLength": "2778",
-      "sha256": "sha256:195ecd9a7e79857803e9ebe1df9393356f5988aefa640ea9123481479c911c6b",
+      "byteLength": "6130",
+      "sha256": "sha256:d9971535ec2df3cbe70c66f84ed0318b68253028e57ac854fafbd4eb75156287",
       "license": "Apache-2.0"
     },
     {
       "path": "components.css",
       "mediaType": "text/css",
-      "byteLength": "8430",
-      "sha256": "sha256:f7bec150fcc2e1a86155044ba9f1505ccc5747100f1d0787eecd3da4a4098570",
+      "byteLength": "7218",
+      "sha256": "sha256:caa4858625828fb4b819932dd0500bb60781ae4618b941aeb1b56c830b2aa11a",
       "license": "Apache-2.0"
     },
     {
       "path": "print.css",
       "mediaType": "text/css",
-      "byteLength": "725",
-      "sha256": "sha256:c8c85ada0cb6c824d550f55ee4edc6a366241461850dd5c4ffa0d184fe7fc5c0",
+      "byteLength": "686",
+      "sha256": "sha256:fb8dfd0d9a1dbc068e283d22c896a2c80791e7f2b17ce47f03628e94ba6a397e",
       "license": "Apache-2.0"
     }
   ],
@@ -274,13 +263,13 @@
     "fixture-token-catalog-contrast"
   ],
   "browserPolicyRef": "gala-theme-css-v2-20211224",
-  "integrity": "sha256:a158667d3069e7be5396128982be75d6cf615470be9845fea858aeaf699753a8",
+  "integrity": "sha256:f6cb40db43e779fd30a788d0c9ad56ae45786cc2540a9d4fce3d2e4be598288d",
   "budgets": {
     "maximumFileBytes": "16384",
     "maximumTotalBytes": "40960",
     "maximumFiles": 8
   },
-  "fixtureDigest": "sha256:647797ec8eb7563bb0fcaf330906dbefcde979fd8595187cb514960cccec6790",
-  "evidenceDigest": "sha256:109b4edd31864fbe5088c031761a0b5278ca9df8abe4f322fc1ef9bc6637ca09",
-  "stylingContractDigest": "sha256:46b43a6d1775f88bf2ded331512bd0cf27d232e256e40a89bda773e50897877f"
+  "fixtureDigest": "sha256:42ac8f857fb188b6e645f2d422fd87584f4a6273daaf1d0245a85698bd2a181a",
+  "evidenceDigest": "sha256:2461b80ecf824c3bdbdb9e6a5c7d2752e847995598766efcb38fb7aa70a8cffc",
+  "stylingContractDigest": "sha256:4aca7e9794bddfb2c3afd22f4efd078e7dcf69dde9d62ce52d28cec19aef8b91"
 }
