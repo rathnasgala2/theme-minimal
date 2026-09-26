@@ -16,6 +16,58 @@ next version; bumping `package.json`'s `version` for that release is an
 owner decision (recommended: `2.1.0`, since nothing below is a breaking
 change to the token/CSS-hook contract).
 
+### Changed (2026-09-25 review follow-up: contract 2.1.0, THM-H1/H2/M1/L1/L2, THD-H7/H8/M1/M9)
+
+- Adopted `@rathnasgala2/template` contract 2.1.0: `theme.json`'s
+  `contractVersion` moves to `2.1.0` and `stylingContractDigest` is
+  re-pinned to the new contract's own `catalogDigest`. `templateRange`
+  stays `^2.0.0` (the template's own published version has not moved).
+- **THM-H1**: rebuilt `components.css` as a true delta. The "Character"
+  override block that restated the base rule set with the values it
+  already resolved to (background-color no-ops on header/footer/select)
+  is gone; its two effective changes (header/footer border colour,
+  code-block background) are now the base rules themselves. Removed
+  header/footer/main's own fixed padding (gala-base's new responsive
+  padding steps would otherwise be shadowed by a same-specificity theme
+  rule), this theme's own root-only `prefers-reduced-motion` rule
+  (gala-base now covers it with broader selector reach), and the inert
+  `#main-content { outline-color: Highlight }` forced-colors mapping.
+- **THM-H2, THM-L2**: light-palette `color-link` (`#2b2b2b` → `#2c6f97`)
+  and `color-focus` (`#2b2b2b` → `#b96900`) are distinct from body text
+  and from each other again; focus now shares one semantic (amber) across
+  both palettes instead of "same as text" in light and "amber" in dark.
+- **THM-M1**: header/footer borders removed outright; pre/code lose their
+  background and radius (`radius-medium` set to `0`); `content-measure`
+  widens `38rem` → `44rem`; root `line-height` `1.6` → `1.7`;
+  `weight-heading` `600` → `500` (h1-h3 now sit at 500, h4-h6/strong stay
+  at 600).
+- **THM-L1**: `space-1`..`space-8` now follow one `0.25rem`-per-index
+  progression instead of two unrelated rules with a discontinuity between
+  `space-3` and `space-4`.
+- **THD-M1**: `color-accent` (`nav a`), `space-3` (blockquote indent) and
+  `space-8` (article-end top margin) are now consumed; the remaining
+  unused tokens are documented in the README with the specific reason each
+  one has no consumer today.
+- **THD-H7**: type scale, overflow containment, image sizing and
+  responsive header/footer/main padding now come from the template's own
+  `gala-base` layer (contract 2.1.0); no theme-specific refinement was
+  needed on top of it.
+- **THD-H8**: iconography stays deferred — the pinned
+  `@rathnasgala2/theme-tooling` checkout's CSS grammar allowlist has no
+  `content` property and no `background-size`/`background-repeat`/`width`
+  alongside `background-image`, so no icon can be placed or sized within
+  the closed grammar today; needs a `theme-tooling` change first.
+- `theme.json.slotHooks` drops `landmark-main-content` (its only rule was
+  the inert forced-colors mapping removed above).
+- CI: the `@rathnasgala2/template` sibling checkout pin moves to
+  `e66d8771189966db1f8f876b005ab59d4f676bcb` (carries the unreleased
+  contract 2.1.0), and the `@rathnasgala2/theme-tooling` sibling checkout
+  pin moves to `68dceb301c071f3a60c2bf4c4f3215a6c3478502`.
+
+Recommended release for everything above: **`2.1.0`** (no removed public
+surface; the contract, token-value and CSS changes are all additive or
+corrective).
+
 ### Changed (THD-H1, 2026-09-25)
 
 - Removed the four inert `outline-color`/`outline-width` declaration pairs
