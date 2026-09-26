@@ -77,6 +77,14 @@
     text-decoration-line: underline;
   }
 
+  [data-gala-publication-root] a:visited {
+    color: var(--gala-color-link-visited);
+  }
+
+  [data-gala-publication-root] a:hover {
+    text-decoration-thickness: 2px;
+  }
+
   [data-gala-publication-root] blockquote {
     border-inline-start: var(--gala-border-width) solid var(--gala-color-border);
     color: var(--gala-color-text-muted);
