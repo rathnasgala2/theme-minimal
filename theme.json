@@ -190,27 +190,22 @@
     },
     { "key": "radius-medium", "type": "length", "light": "0", "dark": "0" },
     { "key": "radius-small", "type": "length", "light": "0", "dark": "0" },
-    { "key": "space-1", "type": "length", "light": "0.2rem", "dark": "0.2rem" },
-    { "key": "space-2", "type": "length", "light": "0.4rem", "dark": "0.4rem" },
-    { "key": "space-3", "type": "length", "light": "0.6rem", "dark": "0.6rem" },
     {
-      "key": "space-4",
+      "key": "space-1",
       "type": "length",
-      "light": "0.875rem",
-      "dark": "0.875rem"
+      "light": "0.25rem",
+      "dark": "0.25rem"
     },
+    { "key": "space-2", "type": "length", "light": "0.5rem", "dark": "0.5rem" },
     {
-      "key": "space-6",
+      "key": "space-3",
       "type": "length",
-      "light": "1.25rem",
-      "dark": "1.25rem"
+      "light": "0.75rem",
+      "dark": "0.75rem"
     },
-    {
-      "key": "space-8",
-      "type": "length",
-      "light": "1.75rem",
-      "dark": "1.75rem"
-    },
+    { "key": "space-4", "type": "length", "light": "1rem", "dark": "1rem" },
+    { "key": "space-6", "type": "length", "light": "1.5rem", "dark": "1.5rem" },
+    { "key": "space-8", "type": "length", "light": "2rem", "dark": "2rem" },
     {
       "key": "weight-heading",
       "type": "font-weight",
@@ -241,8 +236,8 @@
     {
       "path": "tokens.css",
       "mediaType": "text/css",
-      "byteLength": "6162",
-      "sha256": "sha256:157b144955a97ea0d217a588632a33bab79aab3d9947135597597107bed77e11",
+      "byteLength": "6138",
+      "sha256": "sha256:8b72861cca2b87c17b01efe9eea5485efdcddf30d8d8417ca57ff3a8f1c5f8ec",
       "license": "Apache-2.0"
     },
     {
@@ -268,13 +263,13 @@
     "fixture-token-catalog-contrast"
   ],
   "browserPolicyRef": "gala-theme-css-v2-20211224",
-  "integrity": "sha256:67ac83f06e790eee037771bc9cf6a6d5cb75343a96e64e3345cba9b883e6e273",
+  "integrity": "sha256:d6f3cb6407bba86191b5ecbb7c43701b0bada255f2efac3b9501a198336916ad",
   "budgets": {
     "maximumFileBytes": "16384",
     "maximumTotalBytes": "40960",
     "maximumFiles": 8
   },
   "fixtureDigest": "sha256:391253bd4336e245bf892017b88f56f0c9f70802f4525fe1b812f5d0f4f5c4e6",
-  "evidenceDigest": "sha256:96bf8326dbef2226853e58d56aef0f988b3a6dfaae7cec56b859b39b65c14775",
+  "evidenceDigest": "sha256:c3dd455db860e75ebe20e1448bd556a357b8cc953e23ad23c0e9648507ac1a0d",
   "stylingContractDigest": "sha256:9abf99b73a20e034c784ec9648d1f96ea59b59b2ba89028b8c684d1b078275e4"
 }
