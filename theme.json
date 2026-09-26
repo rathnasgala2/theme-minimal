@@ -166,8 +166,8 @@
     {
       "key": "content-measure",
       "type": "length",
-      "light": "38rem",
-      "dark": "38rem"
+      "light": "44rem",
+      "dark": "44rem"
     },
     { "key": "focus-width", "type": "length", "light": "2px", "dark": "2px" },
     {
@@ -188,12 +188,7 @@
       "light": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace",
       "dark": "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
     },
-    {
-      "key": "radius-medium",
-      "type": "length",
-      "light": "0.125rem",
-      "dark": "0.125rem"
-    },
+    { "key": "radius-medium", "type": "length", "light": "0", "dark": "0" },
     { "key": "radius-small", "type": "length", "light": "0", "dark": "0" },
     { "key": "space-1", "type": "length", "light": "0.2rem", "dark": "0.2rem" },
     { "key": "space-2", "type": "length", "light": "0.4rem", "dark": "0.4rem" },
@@ -219,8 +214,8 @@
     {
       "key": "weight-heading",
       "type": "font-weight",
-      "light": "600",
-      "dark": "600"
+      "light": "500",
+      "dark": "500"
     },
     {
       "key": "weight-medium",
@@ -246,15 +241,15 @@
     {
       "path": "tokens.css",
       "mediaType": "text/css",
-      "byteLength": "6190",
-      "sha256": "sha256:af00ba1dfecf7abefb5ddd4026685a3bdf3de2d9557d9885d737b8d588dc13b0",
+      "byteLength": "6162",
+      "sha256": "sha256:157b144955a97ea0d217a588632a33bab79aab3d9947135597597107bed77e11",
       "license": "Apache-2.0"
     },
     {
       "path": "components.css",
       "mediaType": "text/css",
-      "byteLength": "7047",
-      "sha256": "sha256:91239d7b3e04d45ec699501f4f6cde62df7fc392299051d8b1b883a609838d25",
+      "byteLength": "6675",
+      "sha256": "sha256:52d523081155ce5d410e38f241ece79c8fca0b069bcb70acb01e68a04d535fea",
       "license": "Apache-2.0"
     },
     {
@@ -273,13 +268,13 @@
     "fixture-token-catalog-contrast"
   ],
   "browserPolicyRef": "gala-theme-css-v2-20211224",
-  "integrity": "sha256:b690f2f0254555a0be4a0f0fe606de98bf7f71afed512b33ce1026d1280e521d",
+  "integrity": "sha256:67ac83f06e790eee037771bc9cf6a6d5cb75343a96e64e3345cba9b883e6e273",
   "budgets": {
     "maximumFileBytes": "16384",
     "maximumTotalBytes": "40960",
     "maximumFiles": 8
   },
   "fixtureDigest": "sha256:391253bd4336e245bf892017b88f56f0c9f70802f4525fe1b812f5d0f4f5c4e6",
-  "evidenceDigest": "sha256:bd61f589c1c3a8253b17f6f3568d51cf4f5d537a4be73ba072e87627090fa3e8",
+  "evidenceDigest": "sha256:96bf8326dbef2226853e58d56aef0f988b3a6dfaae7cec56b859b39b65c14775",
   "stylingContractDigest": "sha256:9abf99b73a20e034c784ec9648d1f96ea59b59b2ba89028b8c684d1b078275e4"
 }

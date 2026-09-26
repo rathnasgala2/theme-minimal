@@ -29,12 +29,12 @@
     --gala-color-text: #1c1c1c;
     --gala-color-text-muted: #5f5f5f;
     --gala-color-warning: #6a4b00;
-    --gala-content-measure: 38rem;
+    --gala-content-measure: 44rem;
     --gala-focus-width: 2px;
     --gala-font-body: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-heading: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    --gala-radius-medium: 0.125rem;
+    --gala-radius-medium: 0;
     --gala-radius-small: 0;
     --gala-space-1: 0.2rem;
     --gala-space-2: 0.4rem;
@@ -42,7 +42,7 @@
     --gala-space-4: 0.875rem;
     --gala-space-6: 1.25rem;
     --gala-space-8: 1.75rem;
-    --gala-weight-heading: 600;
+    --gala-weight-heading: 500;
     --gala-weight-medium: 500;
     --gala-weight-normal: 400;
     --gala-weight-strong: 600;
@@ -67,14 +67,14 @@
       --gala-color-text: #f0f0f0;
       --gala-color-text-muted: #b0b0b0;
       --gala-color-warning: #ffcf7a;
-      --gala-content-measure: 38rem;
+      --gala-content-measure: 44rem;
       --gala-focus-width: 2px;
       --gala-font-body: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
       --gala-font-heading:
         system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
       --gala-font-mono:
         ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      --gala-radius-medium: 0.125rem;
+      --gala-radius-medium: 0;
       --gala-radius-small: 0;
       --gala-space-1: 0.2rem;
       --gala-space-2: 0.4rem;
@@ -82,7 +82,7 @@
       --gala-space-4: 0.875rem;
       --gala-space-6: 1.25rem;
       --gala-space-8: 1.75rem;
-      --gala-weight-heading: 600;
+      --gala-weight-heading: 500;
       --gala-weight-medium: 500;
       --gala-weight-normal: 400;
       --gala-weight-strong: 600;
@@ -107,12 +107,12 @@
     --gala-color-text: #1c1c1c;
     --gala-color-text-muted: #5f5f5f;
     --gala-color-warning: #6a4b00;
-    --gala-content-measure: 38rem;
+    --gala-content-measure: 44rem;
     --gala-focus-width: 2px;
     --gala-font-body: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-heading: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    --gala-radius-medium: 0.125rem;
+    --gala-radius-medium: 0;
     --gala-radius-small: 0;
     --gala-space-1: 0.2rem;
     --gala-space-2: 0.4rem;
@@ -120,7 +120,7 @@
     --gala-space-4: 0.875rem;
     --gala-space-6: 1.25rem;
     --gala-space-8: 1.75rem;
-    --gala-weight-heading: 600;
+    --gala-weight-heading: 500;
     --gala-weight-medium: 500;
     --gala-weight-normal: 400;
     --gala-weight-strong: 600;
@@ -144,12 +144,12 @@
     --gala-color-text: #f0f0f0;
     --gala-color-text-muted: #b0b0b0;
     --gala-color-warning: #ffcf7a;
-    --gala-content-measure: 38rem;
+    --gala-content-measure: 44rem;
     --gala-focus-width: 2px;
     --gala-font-body: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-heading: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    --gala-radius-medium: 0.125rem;
+    --gala-radius-medium: 0;
     --gala-radius-small: 0;
     --gala-space-1: 0.2rem;
     --gala-space-2: 0.4rem;
@@ -157,7 +157,7 @@
     --gala-space-4: 0.875rem;
     --gala-space-6: 1.25rem;
     --gala-space-8: 1.75rem;
-    --gala-weight-heading: 600;
+    --gala-weight-heading: 500;
     --gala-weight-medium: 500;
     --gala-weight-normal: 400;
     --gala-weight-strong: 600;
