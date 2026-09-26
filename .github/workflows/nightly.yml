@@ -27,8 +27,9 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      # Pinned to the commit carrying the unreleased contract 2.1.0 (TPL-H2/H3/M7:
-      # gala-base layer, pseudoClasses catalog); not yet published to the registry.
+      # Pinned to the commit tagged @rathnasgala2/template 2.1.0 (unreleased)
+      # (not yet published to the registry; see the template's own
+      # CHANGELOG.md Unreleased section, recommended release 2.1.0).
       # `css:check`/`grammar:check` read this checkout by path
       # (WORKSPACE_ROOT/template) for the S2-T12 theme-styling hook
       # contract, so `npm run verify` needs it present in CI.
