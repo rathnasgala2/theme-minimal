@@ -57,10 +57,17 @@ README.md
 
 ## Visual character
 
-Reduced chrome: a near-monochrome palette, a hairline `border-width`, near-square `radius-*`, tightened `space-*`, and `header`/`footer`/`pre`/`code`/`select`/`#gala-appearance-color-mode` surfaces blended into the canvas so only text and rules carry the page. See `tokens.css` for every token value and
-`components.css` for the character-specific component rules
-(`header`/`footer`/`pre`/`code`/`select`/`#gala-appearance-color-mode` surfaces blended into `color-canvas` to remove chrome); every other component rule is the same
-token-driven structure `@rathnasgala2/theme-default` uses.
+Reduced chrome, expressed subtractively rather than by recolouring a copy
+of the base rule set (2026-09-25 review, THM-H1/THM-M1): no header/footer
+border, no code-block background or corner radius, a wider content measure
+(44rem) with more leading (1.7), a two-tier heading weight (500 for
+h1-h3, 600 for h4-h6/strong, instead of one flat 600), a single 0.25rem
+spacing progression, and a restrained but genuinely distinct link colour
+(a muted blue) and focus colour (an amber, the same semantic in both
+palettes) instead of collapsing every interactive colour onto body text.
+See `tokens.css` for every token value and `components.css` for the full
+component rule set — there is no separate "character" override block; the
+theme-specific decisions above are the base rules themselves.
 
 ## Toolchain and how to run locally
 
@@ -145,13 +152,30 @@ color, in **both** palettes independently (passing one palette never
 substitutes for the other, per the brief). All body/link/status/code text
 pairs clear 4.5:1; the non-text border/focus pairs clear 3:1.
 
-Eight of the 35 tokens (`color-accent`, `color-link-visited`,
-`color-on-accent`, `color-success`, `color-surface-raised`, `color-warning`,
-`space-3`, `space-8`) may be declared but never referenced in a given
-theme's own `components.css`/`print.css` (2026-09-25 review, THD-M1). A
-theme is permitted to declare a token it does not itself consume — nothing
-in the contract requires every declared token to appear in that same
-theme's CSS.
+Six of the 35 tokens are declared but never referenced by this theme's own
+`components.css`/`print.css` (2026-09-25 review, THD-M1 — `color-accent`
+and `space-3`/`space-8` were previously on this list and are now applied:
+`color-accent` distinguishes primary-navigation links from body links
+(`nav a`), `space-3` sets the blockquote indent, `space-8` sets the
+article-end top margin). A theme is permitted to declare a token it does
+not itself consume — nothing in the contract requires every declared
+token to appear in that same theme's CSS — but each remaining one here is
+unused for a specific, stated reason, not by omission:
+
+- `color-on-accent`, `color-success`, `color-warning`, `color-surface-raised` —
+  no published hook lets a theme apply a status colour or a raised surface
+  to anything (the only page-kind hook is `page-error`, already wired to
+  `color-danger`); a future contract revision that adds a `page-kind`
+  value per status, or a raised-surface hook, would give these a home.
+- `color-link-visited` — the contract's 2.1.0 `pseudoClasses` catalog now
+  names `:visited` (see "CSS and the styling contract" below), but the
+  pinned `@rathnasgala2/theme-tooling` checkout's `check-css-hooks.mjs`
+  does not yet admit _any_ pseudo-class selector (only pseudo-elements),
+  so `a:visited` would fail the closed-hook conformance gate today.
+- `color-code-canvas`, `radius-medium` — this theme's own THM-M1 decision
+  (no code-block background, no radius); the tokens stay declared at their
+  contract-required position but resolve to values (`radius-medium: 0`)
+  or values (`color-code-canvas`) this theme's CSS no longer reads.
 
 ## CSS and the 64-hook styling contract
 
@@ -163,17 +187,22 @@ closed 64-entry `publicThemeSlotHooks` catalog from
 landmark/heading/prose/code/control/media/page-kind/slot hooks, always
 scoped under the required root compound `[data-gala-publication-root]` (or
 its resolved-palette variant), joined only by the contract's four closed
-combinators (` `, `>`, `+`, `~`). This version of the template's
-styling contract publishes an empty `pseudoClasses` set (no `:focus`/
-`:hover`/etc. selector is available to a theme at all in this template
-version), so focus-ring color/width customization uses only the
-`outline-color`/`outline-width` longhands (never `outline-style`, which
-this theme never sets) on interactive hooks — combining with whatever
-`:focus-visible` behavior the template's own base layer or the browser's
-UA stylesheet supplies, and never suppressing it. `theme.json.slotHooks` is
-the exact sorted set of the 51 hook IDs this CSS actually uses (not the
-whole 64-hook catalog — only the subset a theme actually styles is
-declared, per the S2 brief).
+combinators (` `, `>`, `+`, `~`). Contract 2.1.0 publishes a five-member
+`pseudoClasses` catalog (`:active`, `:disabled`, `:focus-visible`, `:hover`,
+`:visited`) — up from 2.0.0's empty set — but the pinned
+`@rathnasgala2/theme-tooling` checkout this repository's `tooling/run.mjs`
+resolves does not yet admit any pseudo-class selector in
+`check-css-hooks.mjs` (only the four pseudo-elements), so no theme can
+actually author `:hover`/`:visited`/etc. yet; this theme's CSS declares
+none. The real, paintable focus ring for every publication now comes from
+the template's own `gala-base` cascade layer (contract 2.1.0, TPL-H3),
+which applies `outline-style: solid` under `:focus-visible` using this
+theme's `--gala-color-focus`/`--gala-focus-width` tokens — this theme's own
+CSS sets neither `outline-color` nor `outline-width` anywhere, since
+`gala-base` already supplies a real ring and a longhand here would only
+duplicate it. `theme.json.slotHooks` is the exact sorted set of the hook
+IDs this CSS actually uses (not the whole 64-hook catalog — only the
+subset a theme actually styles is declared, per the S2 brief).
 
 `tooling/test/css-hooks.test.mjs` parses every stylesheet with `postcss` (a pinned
 exact version) and `postcss-selector-parser`, and fails the build if any
@@ -206,36 +235,47 @@ declaration block existed.
 ## Accessibility posture
 
 - **Contrast**: see above; asserted by test, both palettes, WCAG 2.2 AA.
-- **Focus visibility**: no `outline: none`/`outline-style: none` anywhere.
-  Previous revisions of this file additionally claimed that
-  `outline-color`/`outline-width` on the interactive hooks produced a
-  themed visible ring; that was false (2026-09-25 review, THD-H1):
-  `outline-style`'s initial value is `none`, so those two longhands paint
-  nothing on their own, and with the UA's own `:focus-visible { outline:
-auto }` supplying `outline-style: auto`, browsers deliberately ignore
-  author `outline-color`/`outline-width` and draw their own platform ring
-  — `--gala-color-focus`/`--gala-focus-width` had no visible effect. The
-  four inert declaration pairs have been removed rather than left as a
-  claim the CSS did not back up. Restoring a real themed ring needs
-  `:focus-visible`, which this contract version does not expose (TPL-H2);
-  until it does, the single hook for that restoration is the now-empty
-  `outline-color`/`outline-width` slot in each of the four rules named
-  above (`#main-content`, `a`, `select`, `#gala-appearance-color-mode` in
-  `components.css`).
-- **`forced-colors: active`**: `components.css` maps links, the main-content
-  focus ring, select borders and the divider rule to system colors
-  (`LinkText`, `Highlight`, `ButtonBorder`, `CanvasText`) so meaning survives
-  a forced-colors palette, per the brief's "forced-colors mode takes
-  precedence where the browser supplies system colors."
-- **`prefers-reduced-motion: reduce`**: collapses any animation/transition
-  duration to effectively zero at the root scope (defensive; this theme
-  declares no animations or transitions of its own, so this rule has no
-  visible effect today but keeps the obligation explicit and testable if a
-  future revision adds one).
-- **Zoom/reflow**: this theme sets no fixed pixel widths that would prevent
-  320px-wide reflow (`main`'s `max-width` is a `rem` content measure, never
-  a lower bound); Playwright-driven 400% zoom/reflow, keyboard-journey and
+- **Focus visibility**: this theme sets no `outline-*` property anywhere
+  (2026-09-25 review, THD-H1/contract 2.1.0). Previous revisions shipped
+  `outline-color`/`outline-width` longhands with no `outline-style`, which
+  paint nothing (`outline-style`'s initial value is `none`) — those were
+  removed rather than left as a claim the CSS did not back up. The real
+  themed ring now comes from the template's own `gala-base` layer (see
+  "CSS and the styling contract" above), which reads this theme's
+  `--gala-color-focus`/`--gala-focus-width` tokens under a real
+  `:focus-visible { outline-style: solid; ... }` rule that always wins over
+  the browser's UA default.
+- **`forced-colors: active`**: `components.css` maps links, select borders
+  and the divider rule to system colors (`LinkText`, `ButtonBorder`,
+  `CanvasText`) so meaning survives a forced-colors palette. (A fifth,
+  inert `#main-content { outline-color: Highlight }` mapping — outline
+  color with no outline style, painting nothing — was removed in the
+  contract 2.1.0 adoption; `gala-base`'s own `:focus-visible` rule already
+  covers `#main-content` like every other focusable element.)
+- **`prefers-reduced-motion: reduce`**: this theme declares no rule of its
+  own (removed in the contract 2.1.0 adoption); `gala-base` applies the
+  same guard with broader `*`, `*::before`, `*::after` coverage on every
+  page regardless of which theme is selected.
+- **Zoom/reflow, type scale, overflow containment**: this theme sets no
+  fixed pixel widths that would prevent 320px-wide reflow (`main`'s
+  `max-width` is a `rem` content measure, never a lower bound). The type
+  scale, `pre`/`article` overflow containment, `img` sizing and responsive
+  header/footer/main padding that THD-H7 previously found entirely absent
+  now come from the template's own `gala-base` layer (contract 2.1.0);
+  this theme adds no refinement on top of it (no theme-specific need was
+  identified). Playwright-driven 400% zoom/reflow, keyboard-journey and
   axe-core runs are S2-T22, explicitly out of this task's scope.
+- **Iconography (THD-H8)**: **deferred.** The template's contract admits a
+  theme-declared passive SVG asset (`internal/media/theme-svg-sanitizer.js`,
+  TPL-C2) referenced from `::before`/`::after` `content: url(...)` or a
+  sized `background-image`. The pinned `@rathnasgala2/theme-tooling`
+  checkout's `check-css-grammar.mjs` closed property allowlist does not
+  include `content` at all, and `background-image` has no accompanying
+  `background-size`/`background-repeat`/`width` in that same allowlist, so
+  there is no way to place or size an SVG mark within the closed CSS
+  vocabulary this repository's pinned tooling currently admits. Shipping an
+  icon needs a `theme-tooling` grammar change first (out of this
+  repository's scope — `theme-tooling` is a separate, shared repository).
 
 ## Digest cycle (`fixtureDigest`, `evidenceDigest`, `integrity`)
 
