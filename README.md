@@ -143,35 +143,40 @@ property is `--gala-<key>`, only ever declared inside `tokens.css`'s
 / `="dark"`) — the same selectors published in
 `@rathnasgala2/template`'s `contracts/theme-styling-contract.jcs`.
 
-`tooling/test/tokens-contrast.test.mjs` computes WCAG relative-luminance contrast
-ratios (the standard sRGB-linearized formula) for every token pair the S2
-brief names — body text, muted text, links (unvisited/visited), danger/
-warning/success status text, on-accent text, code text, and the border/
-focus non-text UI pair — against their governing canvas/surface/accent
+`contrast:check` (`@rathnasgala2/theme-tooling`'s `check-contrast.mjs`,
+reading the shared, configurable `scripts/contrast-pairs.json` list) computes
+WCAG relative-luminance contrast ratios (the standard sRGB-linearized
+formula) for every named token pair — body text, muted text, links
+(unvisited/visited), danger/warning/success status text, on-accent text,
+code text, the border/focus/accent non-text UI pairs, and (as of
+`theme-tooling` 8fd9b36) three adjacency floors added for accent-heavy
+themes: surface-raised/surface (≥1.3:1), accent/text (≥3:1) and
+accent/surface (≥3:1) — against their governing canvas/surface/accent
 color, in **both** palettes independently (passing one palette never
 substitutes for the other, per the brief). All body/link/status/code text
-pairs clear 4.5:1; the non-text border/focus pairs clear 3:1.
+pairs clear 4.5:1; every non-text-UI pair (border, focus, accent,
+surface-raised/surface) clears its own 3:1/1.3:1 floor. `color-accent`
+also doubles as real link text in `nav a`, so this theme keeps it above
+4.5:1 against canvas/surface in both palettes, not just the 3:1 the pair
+itself requires.
 
 Six of the 35 tokens are declared but never referenced by this theme's own
 `components.css`/`print.css` (2026-09-25 review, THD-M1 — `color-accent`
 and `space-3`/`space-8` were previously on this list and are now applied:
 `color-accent` distinguishes primary-navigation links from body links
 (`nav a`), `space-3` sets the blockquote indent, `space-8` sets the
-article-end top margin). A theme is permitted to declare a token it does
-not itself consume — nothing in the contract requires every declared
-token to appear in that same theme's CSS — but each remaining one here is
-unused for a specific, stated reason, not by omission:
+article-end top margin; a second review pass, THM-H2, since applied
+`color-link-visited` too — see `a:visited` below). A theme is permitted to
+declare a token it does not itself consume — nothing in the contract
+requires every declared token to appear in that same theme's CSS — but
+each remaining one here is unused for a specific, stated reason, not by
+omission:
 
 - `color-on-accent`, `color-success`, `color-warning`, `color-surface-raised` —
   no published hook lets a theme apply a status colour or a raised surface
   to anything (the only page-kind hook is `page-error`, already wired to
   `color-danger`); a future contract revision that adds a `page-kind`
   value per status, or a raised-surface hook, would give these a home.
-- `color-link-visited` — the contract's 2.1.0 `pseudoClasses` catalog now
-  names `:visited` (see "CSS and the styling contract" below), but the
-  pinned `@rathnasgala2/theme-tooling` checkout's `check-css-hooks.mjs`
-  does not yet admit _any_ pseudo-class selector (only pseudo-elements),
-  so `a:visited` would fail the closed-hook conformance gate today.
 - `color-code-canvas`, `radius-medium` — this theme's own THM-M1 decision
   (no code-block background, no radius); the tokens stay declared at their
   contract-required position but resolve to values (`radius-medium: 0`)
@@ -189,12 +194,14 @@ scoped under the required root compound `[data-gala-publication-root]` (or
 its resolved-palette variant), joined only by the contract's four closed
 combinators (` `, `>`, `+`, `~`). Contract 2.1.0 publishes a five-member
 `pseudoClasses` catalog (`:active`, `:disabled`, `:focus-visible`, `:hover`,
-`:visited`) — up from 2.0.0's empty set — but the pinned
-`@rathnasgala2/theme-tooling` checkout this repository's `tooling/run.mjs`
-resolves does not yet admit any pseudo-class selector in
-`check-css-hooks.mjs` (only the four pseudo-elements), so no theme can
-actually author `:hover`/`:visited`/etc. yet; this theme's CSS declares
-none. The real, paintable focus ring for every publication now comes from
+`:visited`) — up from 2.0.0's empty set. The pinned
+`@rathnasgala2/theme-tooling` checkout (8fd9b36) admits every one of these
+in `check-css-hooks.mjs`, plus `:nth-child`/`:nth-last-child` with a
+positive An+B/`even`/`odd` argument; this theme uses `:visited` (the
+`a:visited` rule, THM-H2) and `:hover` (a `text-decoration-thickness`
+change on `a:hover`, no color shift — a themed `:active`/`:disabled` state
+has no hook that needs one today). The real, paintable focus ring for
+every publication still comes entirely from
 the template's own `gala-base` cascade layer (contract 2.1.0, TPL-H3),
 which applies `outline-style: solid` under `:focus-visible` using this
 theme's `--gala-color-focus`/`--gala-focus-width` tokens — this theme's own
@@ -263,19 +270,33 @@ declaration block existed.
   header/footer/main padding that THD-H7 previously found entirely absent
   now come from the template's own `gala-base` layer (contract 2.1.0);
   this theme adds no refinement on top of it (no theme-specific need was
-  identified). Playwright-driven 400% zoom/reflow, keyboard-journey and
-  axe-core runs are S2-T22, explicitly out of this task's scope.
-- **Iconography (THD-H8)**: **deferred.** The template's contract admits a
-  theme-declared passive SVG asset (`internal/media/theme-svg-sanitizer.js`,
-  TPL-C2) referenced from `::before`/`::after` `content: url(...)` or a
-  sized `background-image`. The pinned `@rathnasgala2/theme-tooling`
-  checkout's `check-css-grammar.mjs` closed property allowlist does not
-  include `content` at all, and `background-image` has no accompanying
-  `background-size`/`background-repeat`/`width` in that same allowlist, so
-  there is no way to place or size an SVG mark within the closed CSS
-  vocabulary this repository's pinned tooling currently admits. Shipping an
-  icon needs a `theme-tooling` grammar change first (out of this
-  repository's scope — `theme-tooling` is a separate, shared repository).
+  identified).
+- **Visual/accessibility check (`visual:check`, THD-M10)**: `theme-tooling`
+  8fd9b36's shared Playwright + axe-core harness renders this theme
+  through the template's own renderer and scans the result at
+  320/768/1440px, in both palettes, in CI's own `visual` job (not part of
+  `verify` — see `theme-tooling`'s README for why). It is clean except one
+  finding that is not this theme's to fix: in the dark-palette runs, the
+  fixture's self-referencing links (the skip link, and every nav/breadcrumb
+  link back to the fixture's own page) resolve to `:visited` once
+  Chromium has navigated to that URL, and Chromium's history-sniffing
+  protection makes the true rendered `:visited` style unobservable to
+  `getComputedStyle`/axe-core — the same finding appears with `a:visited`
+  present, absent, or given a literal (non-token) value, and was already
+  present on this repository's pre-review commit against the same pinned
+  template/tooling. It is a harness/browser-privacy limitation around
+  self-referencing `:visited` links, not a contrast defect this theme's
+  CSS can affect.
+- **Iconography (THD-H8)**: `theme-tooling` 8fd9b36 admits a closed icon
+  property set (`content: ""` only, `background-size`/`background-position`/
+  `background-repeat`, `width`/`height`/`inline-size`/`block-size`,
+  `mask-*`) for a decorative mark on an existing hook's `::before`/
+  `::after`. This theme's one reference use of it is deliberately minimal:
+  a small (`0.25rem`) muted-text square before
+  `[data-gala-slot="article-end"]`'s content, drawn with `background-color`
+  alone (no `background-image`/`mask-image` — there is no package-owned
+  image asset to size, and the closed file set admits none), consistent
+  with THM-M1's "minimality in weight, not in a recolouring pass" thesis.
 
 ## Digest cycle (`fixtureDigest`, `evidenceDigest`, `integrity`)
 

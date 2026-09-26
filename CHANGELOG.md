@@ -16,6 +16,66 @@ next version; bumping `package.json`'s `version` for that release is an
 owner decision (recommended: `2.1.0`, since nothing below is a breaking
 change to the token/CSS-hook contract).
 
+### Changed (2026-09-25 second review pass: `@rathnasgala2/theme-tooling` 8fd9b36, THD-M10/M2/H8/L2, THM-H2)
+
+- CI: the `@rathnasgala2/template` sibling checkout pin moves to
+  `d2b2f0ffc38407851e293e5a8a92d8863a0182d1` (still contract 2.1.0,
+  unreleased) and the `@rathnasgala2/theme-tooling` sibling checkout pin
+  moves to `8fd9b36f85f4ae0a34dfb6ebb7c55319672071d2`, which adds
+  contract-driven pseudo-class admission, the icon property set, three
+  new contrast-pair floors, two-way `slotHooks` reconciliation and the
+  `visual:check` Playwright/axe harness. `stylingContractDigest` is
+  unchanged: the re-pinned contract's `catalogDigest` is byte-identical
+  to the one already committed.
+- **THD-M10**: `ci.yml` gained a `visual` job that installs Chromium and
+  runs `tooling`'s new `visual:check` script, uploading screenshots as a
+  build artifact; deliberately its own job, not folded into `verify` (see
+  `theme-tooling`'s README).
+- **THD-M2**: `color-accent` and `color-surface-raised` each cleared
+  every pre-existing contrast pair but failed the three new floors
+  (surface-raised/surface ≥1.3:1, accent/text ≥3:1, accent/surface ≥3:1)
+  in both palettes — `color-accent` sat within a few percent of
+  `color-text`, and `color-surface-raised` within a few percent of
+  `color-surface`. Moved `color-accent` to a mid neutral gray (light
+  `#6e6e6e`, dark `#808080`) and `color-surface-raised` to a more
+  distinct step off the canvas (light `#dcdcdc`, dark `#323232`); both
+  stay strictly achromatic (THM-M1's "minimality in weight, not in a
+  recolouring pass" thesis holds), and `nav`'s actual link-text usage of
+  `color-accent` stays above real 4.5:1 text contrast, not just the new
+  pair's 3:1 non-text-UI minimum.
+- **THD-H8**: one reference icon — a small, near-invisible square before
+  `[data-gala-slot="article-end"]`'s content (`0.25rem`, muted-text
+  color), using only the newly admitted icon property set (`content: ""`
+  plus sizing properties) on an existing hook, no new `slotHooks` entry.
+- **THM-H2**: `color-link-visited` was byte-identical to
+  `color-text-muted` in the light palette (and nearly so in dark) — a
+  visited link and plain muted text were indistinguishable. Gave it its
+  own restrained, desaturated blue-gray in both palettes (light
+  `#4a6f83`, dark `#95b0bc`), added `a:visited` (reads the token) and
+  `a:hover` (a `text-decoration-thickness` change, no color shift).
+  Focus is unchanged: it continues to come entirely from `gala-base`'s
+  `:focus-visible` rule reading this theme's tokens.
+- **THD-L2**: `print.css`'s `a` rule dropped `text-decoration-line:
+underline` — identical to, and unaffected by print media, what
+  `components.css`'s own `a` rule already sets in the same cascade
+  layer; the print override now carries only the one declaration
+  (`color`) that actually differs from screen.
+- `visual:check` (Playwright + axe-core, 320/768/1440px, light/dark):
+  clean except one pre-existing, unfixable-from-this-repository finding
+  — the shared fixture's self-referencing links (the skip link and every
+  nav/breadcrumb link back to the fixture's own page) resolve to
+  `:visited` once Chromium has navigated to that URL, and Chromium's
+  privacy protection against history-sniffing makes the true rendered
+  `:visited` style unobservable to `getComputedStyle`/axe-core in dark
+  mode, regardless of what CSS a theme declares (verified: identical
+  finding with `a:visited` present, absent, token- or literal-valued, and
+  present unchanged on this repository's pre-review-pass commit against
+  the same pinned template/tooling). Out of scope for a theme's CSS to
+  fix; tracked as a harness-level, not a theme-level, finding.
+
+Recommended release for everything above: **`2.1.0`** (same as the first
+review pass below — no removed public surface).
+
 ### Changed (2026-09-25 review follow-up: contract 2.1.0, THM-H1/H2/M1/L1/L2, THD-H7/H8/M1/M9)
 
 - Adopted `@rathnasgala2/template` contract 2.1.0: `theme.json`'s
@@ -52,11 +112,12 @@ change to the token/CSS-hook contract).
   responsive header/footer/main padding now come from the template's own
   `gala-base` layer (contract 2.1.0); no theme-specific refinement was
   needed on top of it.
-- **THD-H8**: iconography stays deferred — the pinned
-  `@rathnasgala2/theme-tooling` checkout's CSS grammar allowlist has no
+- **THD-H8**: iconography stayed deferred as of this entry — the pinned
+  `@rathnasgala2/theme-tooling` checkout's CSS grammar allowlist had no
   `content` property and no `background-size`/`background-repeat`/`width`
-  alongside `background-image`, so no icon can be placed or sized within
-  the closed grammar today; needs a `theme-tooling` change first.
+  alongside `background-image`, so no icon could be placed or sized within
+  the closed grammar at the time; resolved in the section below once
+  `theme-tooling` 8fd9b36 added the icon property set.
 - `theme.json.slotHooks` drops `landmark-main-content` (its only rule was
   the inert forced-colors mapping removed above).
 - CI: the `@rathnasgala2/template` sibling checkout pin moves to
