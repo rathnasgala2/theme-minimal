@@ -1,44 +1,133 @@
 @layer gala-tokens {
-  [data-gala-publication-root][data-gala-resolved-color-mode="light"] {
+  /**
+   * Without script, `data-gala-resolved-color-mode` is never
+   * set (it is written only by the template's browser bootstrap), so
+   * neither resolved-mode block below ever matches and no `--gala-*`
+   * property is defined at all. This bare-root block plus the
+   * `prefers-color-scheme` override give every no-JS reader, text-mode
+   * crawler, and pre-hydration paint a real, themed default instead of an
+   * unstyled document. The resolved-mode blocks below still win once the
+   * template sets the attribute (higher specificity: two attribute
+   * selectors beat one).
+   */
+  [data-gala-publication-root] {
     --gala-border-width: 1px;
-    --gala-color-accent: #2b2b2b;
+    --gala-color-accent: #6e6e6e;
     --gala-color-border: #8a8a8a;
     --gala-color-canvas: #ffffff;
     --gala-color-code-canvas: #f2f2f2;
     --gala-color-code-text: #1c1c1c;
     --gala-color-danger: #8a241c;
-    --gala-color-focus: #2b2b2b;
-    --gala-color-link: #2b2b2b;
-    --gala-color-link-visited: #5f5f5f;
+    --gala-color-focus: #b96900;
+    --gala-color-link: #2c6f97;
+    --gala-color-link-visited: #4a6f83;
     --gala-color-on-accent: #ffffff;
     --gala-color-selection: #d9d9d9;
     --gala-color-success: #245c38;
     --gala-color-surface: #ffffff;
-    --gala-color-surface-raised: #f2f2f2;
+    --gala-color-surface-raised: #dcdcdc;
     --gala-color-text: #1c1c1c;
     --gala-color-text-muted: #5f5f5f;
     --gala-color-warning: #6a4b00;
-    --gala-content-measure: 38rem;
+    --gala-content-measure: 44rem;
     --gala-focus-width: 2px;
     --gala-font-body: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-heading: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    --gala-radius-medium: 0.125rem;
+    --gala-radius-medium: 0;
     --gala-radius-small: 0;
-    --gala-space-1: 0.2rem;
-    --gala-space-2: 0.4rem;
-    --gala-space-3: 0.6rem;
-    --gala-space-4: 0.875rem;
-    --gala-space-6: 1.25rem;
-    --gala-space-8: 1.75rem;
-    --gala-weight-heading: 600;
+    --gala-space-1: 0.25rem;
+    --gala-space-2: 0.5rem;
+    --gala-space-3: 0.75rem;
+    --gala-space-4: 1rem;
+    --gala-space-6: 1.5rem;
+    --gala-space-8: 2rem;
+    --gala-weight-heading: 500;
+    --gala-weight-medium: 500;
+    --gala-weight-normal: 400;
+    --gala-weight-strong: 600;
+  }
+  @media (prefers-color-scheme: dark) {
+    [data-gala-publication-root] {
+      --gala-border-width: 1px;
+      --gala-color-accent: #808080;
+      --gala-color-border: #7a7a7a;
+      --gala-color-canvas: #121212;
+      --gala-color-code-canvas: #1c1c1c;
+      --gala-color-code-text: #f0f0f0;
+      --gala-color-danger: #ff9a8d;
+      --gala-color-focus: #ffd166;
+      --gala-color-link: #e6e6e6;
+      --gala-color-link-visited: #95b0bc;
+      --gala-color-on-accent: #121212;
+      --gala-color-selection: #3a3a3a;
+      --gala-color-success: #8fe0a8;
+      --gala-color-surface: #121212;
+      --gala-color-surface-raised: #323232;
+      --gala-color-text: #f0f0f0;
+      --gala-color-text-muted: #b0b0b0;
+      --gala-color-warning: #ffcf7a;
+      --gala-content-measure: 44rem;
+      --gala-focus-width: 2px;
+      --gala-font-body: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
+      --gala-font-heading:
+        system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
+      --gala-font-mono:
+        ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --gala-radius-medium: 0;
+      --gala-radius-small: 0;
+      --gala-space-1: 0.25rem;
+      --gala-space-2: 0.5rem;
+      --gala-space-3: 0.75rem;
+      --gala-space-4: 1rem;
+      --gala-space-6: 1.5rem;
+      --gala-space-8: 2rem;
+      --gala-weight-heading: 500;
+      --gala-weight-medium: 500;
+      --gala-weight-normal: 400;
+      --gala-weight-strong: 600;
+    }
+  }
+  [data-gala-publication-root][data-gala-resolved-color-mode="light"] {
+    --gala-border-width: 1px;
+    --gala-color-accent: #6e6e6e;
+    --gala-color-border: #8a8a8a;
+    --gala-color-canvas: #ffffff;
+    --gala-color-code-canvas: #f2f2f2;
+    --gala-color-code-text: #1c1c1c;
+    --gala-color-danger: #8a241c;
+    --gala-color-focus: #b96900;
+    --gala-color-link: #2c6f97;
+    --gala-color-link-visited: #4a6f83;
+    --gala-color-on-accent: #ffffff;
+    --gala-color-selection: #d9d9d9;
+    --gala-color-success: #245c38;
+    --gala-color-surface: #ffffff;
+    --gala-color-surface-raised: #dcdcdc;
+    --gala-color-text: #1c1c1c;
+    --gala-color-text-muted: #5f5f5f;
+    --gala-color-warning: #6a4b00;
+    --gala-content-measure: 44rem;
+    --gala-focus-width: 2px;
+    --gala-font-body: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
+    --gala-font-heading: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
+    --gala-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --gala-radius-medium: 0;
+    --gala-radius-small: 0;
+    --gala-space-1: 0.25rem;
+    --gala-space-2: 0.5rem;
+    --gala-space-3: 0.75rem;
+    --gala-space-4: 1rem;
+    --gala-space-6: 1.5rem;
+    --gala-space-8: 2rem;
+    --gala-weight-heading: 500;
     --gala-weight-medium: 500;
     --gala-weight-normal: 400;
     --gala-weight-strong: 600;
   }
   [data-gala-publication-root][data-gala-resolved-color-mode="dark"] {
     --gala-border-width: 1px;
-    --gala-color-accent: #e6e6e6;
+    --gala-color-accent: #808080;
     --gala-color-border: #7a7a7a;
     --gala-color-canvas: #121212;
     --gala-color-code-canvas: #1c1c1c;
@@ -46,29 +135,29 @@
     --gala-color-danger: #ff9a8d;
     --gala-color-focus: #ffd166;
     --gala-color-link: #e6e6e6;
-    --gala-color-link-visited: #b8b8b8;
+    --gala-color-link-visited: #95b0bc;
     --gala-color-on-accent: #121212;
     --gala-color-selection: #3a3a3a;
     --gala-color-success: #8fe0a8;
     --gala-color-surface: #121212;
-    --gala-color-surface-raised: #1c1c1c;
+    --gala-color-surface-raised: #323232;
     --gala-color-text: #f0f0f0;
     --gala-color-text-muted: #b0b0b0;
     --gala-color-warning: #ffcf7a;
-    --gala-content-measure: 38rem;
+    --gala-content-measure: 44rem;
     --gala-focus-width: 2px;
     --gala-font-body: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-heading: system-ui, Segoe UI, Helvetica Neue, Arial, sans-serif;
     --gala-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    --gala-radius-medium: 0.125rem;
+    --gala-radius-medium: 0;
     --gala-radius-small: 0;
-    --gala-space-1: 0.2rem;
-    --gala-space-2: 0.4rem;
-    --gala-space-3: 0.6rem;
-    --gala-space-4: 0.875rem;
-    --gala-space-6: 1.25rem;
-    --gala-space-8: 1.75rem;
-    --gala-weight-heading: 600;
+    --gala-space-1: 0.25rem;
+    --gala-space-2: 0.5rem;
+    --gala-space-3: 0.75rem;
+    --gala-space-4: 1rem;
+    --gala-space-6: 1.5rem;
+    --gala-space-8: 2rem;
+    --gala-weight-heading: 500;
     --gala-weight-medium: 500;
     --gala-weight-normal: 400;
     --gala-weight-strong: 600;

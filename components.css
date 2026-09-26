@@ -4,36 +4,30 @@
     color: var(--gala-color-text);
     font-family: var(--gala-font-body);
     font-weight: var(--gala-weight-normal);
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   [data-gala-publication-root] header {
     background-color: var(--gala-color-surface);
-    border-bottom: var(--gala-border-width) solid var(--gala-color-border);
-    padding: var(--gala-space-4) var(--gala-space-6);
   }
 
   [data-gala-publication-root] nav {
     font-weight: var(--gala-weight-medium);
   }
 
+  [data-gala-publication-root] nav a {
+    color: var(--gala-color-accent);
+  }
+
   [data-gala-publication-root] main {
     display: block;
     margin: 0 auto;
     max-width: var(--gala-content-measure);
-    padding: var(--gala-space-6) var(--gala-space-4);
-  }
-
-  [data-gala-publication-root] #main-content {
-    outline-color: var(--gala-color-focus);
-    outline-width: var(--gala-focus-width);
   }
 
   [data-gala-publication-root] footer {
     background-color: var(--gala-color-surface);
-    border-top: var(--gala-border-width) solid var(--gala-color-border);
     color: var(--gala-color-text-muted);
-    padding: var(--gala-space-6) var(--gala-space-6);
   }
 
   [data-gala-publication-root] article {
@@ -80,16 +74,23 @@
 
   [data-gala-publication-root] a {
     color: var(--gala-color-link);
-    outline-color: var(--gala-color-focus);
-    outline-width: var(--gala-focus-width);
     text-decoration-line: underline;
+    text-decoration-skip-ink: auto;
+  }
+
+  [data-gala-publication-root] a:visited {
+    color: var(--gala-color-link-visited);
+  }
+
+  [data-gala-publication-root] a:hover {
+    text-decoration-thickness: 2px;
   }
 
   [data-gala-publication-root] blockquote {
     border-inline-start: var(--gala-border-width) solid var(--gala-color-border);
     color: var(--gala-color-text-muted);
     margin: var(--gala-space-4) 0;
-    padding-inline-start: var(--gala-space-4);
+    padding-inline-start: var(--gala-space-3);
   }
 
   [data-gala-publication-root] ul,
@@ -137,8 +138,6 @@
   }
 
   [data-gala-publication-root] pre {
-    background-color: var(--gala-color-code-canvas);
-    border-radius: var(--gala-radius-medium);
     color: var(--gala-color-code-text);
     font-family: var(--gala-font-mono);
     margin: var(--gala-space-4) 0;
@@ -146,11 +145,8 @@
   }
 
   [data-gala-publication-root] code {
-    background-color: var(--gala-color-code-canvas);
-    border-radius: var(--gala-radius-small);
     color: var(--gala-color-code-text);
     font-family: var(--gala-font-mono);
-    padding: 0 var(--gala-space-1);
   }
 
   [data-gala-publication-root] .token {
@@ -218,8 +214,6 @@
     border: var(--gala-border-width) solid var(--gala-color-border);
     border-radius: var(--gala-radius-small);
     color: var(--gala-color-text);
-    outline-color: var(--gala-color-focus);
-    outline-width: var(--gala-focus-width);
     padding: var(--gala-space-1) var(--gala-space-2);
   }
 
@@ -251,8 +245,17 @@
 
   [data-gala-publication-root] [data-gala-slot="article-end"] {
     border-top: var(--gala-border-width) solid var(--gala-color-border);
-    margin-top: var(--gala-space-6);
+    margin-top: var(--gala-space-8);
     padding-top: var(--gala-space-4);
+  }
+
+  [data-gala-publication-root] [data-gala-slot="article-end"]::before {
+    content: "";
+    display: inline-block;
+    width: 0.25rem;
+    height: 0.25rem;
+    margin: 0 var(--gala-space-2) 0 0;
+    background-color: var(--gala-color-text-muted);
   }
 
   [data-gala-publication-root] [data-gala-page-kind="error"] {
@@ -264,41 +267,9 @@
     color: var(--gala-color-text);
   }
 
-  /* Character: reduced chrome (S2-T14, theme-minimal). */
-  [data-gala-publication-root] header {
-    background-color: var(--gala-color-canvas);
-    border-bottom-color: var(--gala-color-canvas);
-  }
-
-  [data-gala-publication-root] footer {
-    background-color: var(--gala-color-canvas);
-    border-top-color: var(--gala-color-canvas);
-  }
-
-  [data-gala-publication-root] pre,
-  [data-gala-publication-root] code {
-    background-color: var(--gala-color-canvas);
-  }
-
-  [data-gala-publication-root] select,
-  [data-gala-publication-root] #gala-appearance-color-mode {
-    background-color: var(--gala-color-canvas);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    [data-gala-publication-root] {
-      animation-duration: 0.001ms !important;
-      transition-duration: 0.001ms !important;
-    }
-  }
-
   @media (forced-colors: active) {
     [data-gala-publication-root] a {
       color: LinkText;
-    }
-
-    [data-gala-publication-root] #main-content {
-      outline-color: Highlight;
     }
 
     [data-gala-publication-root] select {
