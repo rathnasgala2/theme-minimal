@@ -148,17 +148,18 @@ reading the shared, configurable `scripts/contrast-pairs.json` list) computes
 WCAG relative-luminance contrast ratios (the standard sRGB-linearized
 formula) for every named token pair — body text, muted text, links
 (unvisited/visited), danger/warning/success status text, on-accent text,
-code text, the border/focus/accent non-text UI pairs, and (as of
-`theme-tooling` 8fd9b36) three adjacency floors added for accent-heavy
-themes: surface-raised/surface (≥1.3:1), accent/text (≥3:1) and
-accent/surface (≥3:1) — against their governing canvas/surface/accent
-color, in **both** palettes independently (passing one palette never
-substitutes for the other, per the brief). All body/link/status/code text
-pairs clear 4.5:1; every non-text-UI pair (border, focus, accent,
-surface-raised/surface) clears its own 3:1/1.3:1 floor. `color-accent`
-also doubles as real link text in `nav a`, so this theme keeps it above
-4.5:1 against canvas/surface in both palettes, not just the 3:1 the pair
-itself requires.
+code text, the border/focus/accent non-text UI pairs, and four adjacency
+floors added for accent-heavy themes across `theme-tooling` 8fd9b36 and
+ae2ee49: surface-raised/surface (≥1.3:1), accent/text (≥3:1),
+accent/surface (≥3:1) and accent/code-canvas (≥3:1) — against their
+governing canvas/surface/accent color, in **both** palettes independently
+(passing one palette never substitutes for the other, per the brief). All
+body/link/status/code text pairs clear 4.5:1; every non-text-UI pair
+(border, focus, accent, surface-raised/surface, accent/code-canvas)
+clears its own 3:1/1.3:1 floor. `color-accent` also doubles as real link
+text in `nav a`, so this theme keeps it above 4.5:1 against
+canvas/surface in both palettes, not just the 3:1 the pair itself
+requires.
 
 Six of the 35 tokens are declared but never referenced by this theme's own
 `components.css`/`print.css` (2026-09-25 review, THD-M1 — `color-accent`
@@ -195,12 +196,15 @@ its resolved-palette variant), joined only by the contract's four closed
 combinators (` `, `>`, `+`, `~`). Contract 2.1.0 publishes a five-member
 `pseudoClasses` catalog (`:active`, `:disabled`, `:focus-visible`, `:hover`,
 `:visited`) — up from 2.0.0's empty set. The pinned
-`@rathnasgala2/theme-tooling` checkout (8fd9b36) admits every one of these
+`@rathnasgala2/theme-tooling` checkout (ae2ee49) admits every one of these
 in `check-css-hooks.mjs`, plus `:nth-child`/`:nth-last-child` with a
 positive An+B/`even`/`odd` argument; this theme uses `:visited` (the
 `a:visited` rule, THM-H2) and `:hover` (a `text-decoration-thickness`
 change on `a:hover`, no color shift — a themed `:active`/`:disabled` state
-has no hook that needs one today). The real, paintable focus ring for
+has no hook that needs one today). `components.css`'s `a` rule also sets
+`text-decoration-skip-ink: auto` (admitted to `grammar:check`'s closed
+property allowlist by `theme-tooling` ae2ee49), so underlines break
+around descenders instead of crossing them. The real, paintable focus ring for
 every publication still comes entirely from
 the template's own `gala-base` cascade layer (contract 2.1.0, TPL-H3),
 which applies `outline-style: solid` under `:focus-visible` using this
@@ -272,21 +276,17 @@ declaration block existed.
   this theme adds no refinement on top of it (no theme-specific need was
   identified).
 - **Visual/accessibility check (`visual:check`, THD-M10)**: `theme-tooling`
-  8fd9b36's shared Playwright + axe-core harness renders this theme
-  through the template's own renderer and scans the result at
-  320/768/1440px, in both palettes, in CI's own `visual` job (not part of
-  `verify` — see `theme-tooling`'s README for why). It is clean except one
-  finding that is not this theme's to fix: in the dark-palette runs, the
-  fixture's self-referencing links (the skip link, and every nav/breadcrumb
-  link back to the fixture's own page) resolve to `:visited` once
-  Chromium has navigated to that URL, and Chromium's history-sniffing
-  protection makes the true rendered `:visited` style unobservable to
-  `getComputedStyle`/axe-core — the same finding appears with `a:visited`
-  present, absent, or given a literal (non-token) value, and was already
-  present on this repository's pre-review commit against the same pinned
-  template/tooling. It is a harness/browser-privacy limitation around
-  self-referencing `:visited` links, not a contrast defect this theme's
-  CSS can affect.
+  ae2ee49's shared Playwright + axe-core harness renders this theme
+  through the template's own renderer (fixture served over loopback HTTP)
+  and scans the result at 320/768/1440px, in both palettes, in CI's own
+  `visual` job (not part of `verify` — see `theme-tooling`'s README for
+  why). It is clean: no serious/critical axe violations and no horizontal
+  overflow in any of the six palette/viewport combinations. An earlier
+  pinned commit served the fixture from `file://`, under which the
+  fixture's self-referencing links resolved to `:visited` in a way
+  Chromium's history-sniffing protection made unobservable to
+  `getComputedStyle`/axe-core in dark mode; serving the fixture over HTTP
+  resolved that, and no exception remains.
 - **Iconography (THD-H8)**: `theme-tooling` 8fd9b36 admits a closed icon
   property set (`content: ""` only, `background-size`/`background-position`/
   `background-repeat`, `width`/`height`/`inline-size`/`block-size`,

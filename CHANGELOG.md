@@ -4,6 +4,27 @@ All notable changes to `@rathnasgala2/theme-minimal` are documented here.
 
 ## Unreleased
 
+### Changed (2026-09-25 third review pass: `@rathnasgala2/theme-tooling` ae2ee49)
+
+- CI: the `@rathnasgala2/theme-tooling` sibling checkout pin moves to
+  `ae2ee4979a4e5f6a4335c99b869f80eacd359788` (still `0.1.0`, unpublished),
+  which serves the shared visual-check fixture over loopback HTTP instead
+  of `file://`. That resolves the dark-palette `:visited`/harness finding
+  recorded below under the second review pass: `visual:check` is now
+  clean across both palettes and all three viewports with no serious/
+  critical axe violations and no horizontal overflow (previously logged
+  as an unfixable, harness-level limitation — it was specific to loading
+  the fixture from disk and does not reproduce over HTTP). `ae2ee49` also
+  admits `text-decoration-skip-ink` (`auto|none|all`) to the CSS grammar
+  catalog and adds `color-accent` on `color-code-canvas` as a new default
+  non-text-UI contrast pair (≥3:1); this theme's existing accent/canvas
+  colors already clear it in both palettes (light 4.55:1, dark 4.32:1) —
+  no color values changed.
+- `components.css`'s `a` rule gains `text-decoration-skip-ink: auto`, so
+  underlines break around descenders instead of crossing them.
+- `digest:generate` re-run after the above (asset byte-lengths/digests are
+  unchanged in value but the cycle is re-emitted for the new tooling pin).
+
 2026-09-25 code-discipline review remediation (THD-H5): this file
 previously carried three dated sub-headings under `## Unreleased` above a
 `## 2.0.0 - 2026-09-22` heading, even though `2.0.0` has been on the
@@ -61,17 +82,15 @@ underline` — identical to, and unaffected by print media, what
   layer; the print override now carries only the one declaration
   (`color`) that actually differs from screen.
 - `visual:check` (Playwright + axe-core, 320/768/1440px, light/dark):
-  clean except one pre-existing, unfixable-from-this-repository finding
-  — the shared fixture's self-referencing links (the skip link and every
-  nav/breadcrumb link back to the fixture's own page) resolve to
-  `:visited` once Chromium has navigated to that URL, and Chromium's
-  privacy protection against history-sniffing makes the true rendered
-  `:visited` style unobservable to `getComputedStyle`/axe-core in dark
-  mode, regardless of what CSS a theme declares (verified: identical
-  finding with `a:visited` present, absent, token- or literal-valued, and
-  present unchanged on this repository's pre-review-pass commit against
-  the same pinned template/tooling). Out of scope for a theme's CSS to
-  fix; tracked as a harness-level, not a theme-level, finding.
+  clean, except one finding logged at the time — the shared fixture's
+  self-referencing links (the skip link and every nav/breadcrumb link
+  back to the fixture's own page) resolved to `:visited` once Chromium
+  had navigated to that URL, and Chromium's privacy protection against
+  history-sniffing made the true rendered `:visited` style unobservable
+  to `getComputedStyle`/axe-core in dark mode. That was specific to
+  loading the fixture from `file://`; the third review pass above
+  (`theme-tooling` ae2ee49, fixture served over loopback HTTP) resolved
+  it, and `visual:check` is now clean with no exceptions.
 
 Recommended release for everything above: **`2.1.0`** (same as the first
 review pass below — no removed public surface).
