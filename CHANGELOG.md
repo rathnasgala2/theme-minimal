@@ -4,6 +4,27 @@ All notable changes to `@rathnasgala2/theme-minimal` are documented here.
 
 ## Unreleased
 
+## 3.0.0 - 2026-10-10
+
+Breaking. This theme moves onto the approved redesign's contract 3 with the
+Minimal preview values, with no compatibility with 2.x.
+
+- `theme.json` now carries the 116-token contract (schema 3.0.0) with the
+  Minimal values (monochrome, hairline rules, no shadows, no page
+  decoration), `contractVersion` 3.0.0, `templateRange` `^3.0.0` and the
+  template styling contract 3.0.0 digest. The old 35-token catalog and its
+  token keys are gone.
+- `tokens.css` is generated from `theme.json` (`tokens:generate`) and checked
+  by `tokens:check`.
+- `components.css` shrank to a few skin rules; layout and components now live
+  in the template's base layer. Only the 11 hooks the CSS uses are listed in
+  `slotHooks`.
+- `print.css` keeps the same rules.
+- Size budgets raised to 32768 bytes per file and 98304 in total.
+- Code comment colours are `#6b6b6b` (light) and `#8a8a8a` (dark) so they
+  clear WCAG AA on the code background.
+- CI and release pin the template 3.0.1 and theme-tooling 0.3.0 commits.
+
 ## 2.1.0 - 2026-09-26
 
 ### Fixed (THD-M6, 2026-09-26 fourth pass)
