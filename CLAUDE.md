@@ -24,7 +24,7 @@ file set. Never add:
   (`.github/workflows/release.yaml`, once added by a later task, is
   source-validated but never packed either).
 - Any CSS selector that is not the root/palette scope or one of
-  `@rathnasgala2/template`'s published 178 styling-contract hooks
+  `@rathnasgala2/template`'s published styling-contract hooks
   (`contracts/theme-styling-contract.jcs` in the template repository) —
   `css:check` in `@rathnasgala2/theme-tooling` enforces this.
 - `@import`, an external-origin `url(...)`, or any other remote reference
@@ -34,7 +34,9 @@ file set. Never add:
 
 ```sh
 source ~/.nvm/nvm.sh && nvm use 24.18.0
-npm --prefix tooling install
+export GALA_THEME_TOOLING_DIR=../../theme-tooling
+export GALA_TEMPLATE_DIR=../../template
+export GALA_SCHEMA_DIR=../../schema
 npm --prefix tooling run verify
 ```
 
@@ -49,8 +51,8 @@ asset byte-lengths/digests and the whole digest chain
 (`fixtureDigest`/`evidenceDigest`/`integrity`) and is idempotent (run it
 twice; `digest:check` fails if the second run changes anything).
 `@rathnasgala2/template` is never an npm dependency — it is resolved by
-path at test/script run time via `tooling/scripts/resolve-template-dir.mjs`
-(`$GALA_TEMPLATE_DIR`); see README "Commands".
+path at test/script run time through `$GALA_TEMPLATE_DIR`; schemas resolve
+through `$GALA_SCHEMA_DIR`. See README "Commands".
 
 ## What never goes here
 
@@ -66,7 +68,8 @@ Confirm: `package.json` still has no scripts/dependencies/engines;
 (all 116 tokens, both palettes, exact order) via
 `@rathnasgala2/schemas`'s own `validateGalaDocument`; every stylesheet is
 one outer matching `@layer` block; every selector resolves only to the
-template's published 178-hook catalog; WCAG 2.2 AA contrast holds in both
+template's published hook catalog; the declared generation-4 composition is
+complete and valid; WCAG 2.2 AA contrast holds in both
 palettes; no `outline: none`/`outline-style: none`/`@import`/external
 `url()`/script/executable construct anywhere; the digest cycle is
 idempotent across two consecutive generator runs; the template

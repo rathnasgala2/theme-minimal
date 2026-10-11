@@ -2,9 +2,9 @@
   "schemaId": "urn:gala:schema:theme-contract:2.0.0",
   "schemaVersion": "2.0.0",
   "themeId": "minimal",
-  "package": "@rathnasgala2/theme-minimal@3.0.0",
-  "contractVersion": "3.0.0",
-  "templateRange": "^3.0.0",
+  "package": "@rathnasgala2/theme-minimal@4.0.0",
+  "contractVersion": "4.0.0",
+  "templateRange": "^4.0.0",
   "stylesheets": ["tokens.css", "components.css", "print.css"],
   "cssLayers": ["gala-tokens", "gala-components", "gala-print"],
   "slotHooks": [
@@ -645,13 +645,26 @@
     "fixture-token-catalog-contrast"
   ],
   "browserPolicyRef": "gala-theme-css-v2-20211224",
-  "integrity": "sha256:832b9c0df621591f163b469067fa07eb46ddbff54e19207de052f722d7e27bb5",
+  "integrity": "sha256:0c8182a6a9e1d6b2a6291039c71b36767b99009a1a6ef12b01a427f96ec1378a",
   "budgets": {
     "maximumFileBytes": "32768",
     "maximumTotalBytes": "98304",
     "maximumFiles": 8
   },
-  "fixtureDigest": "sha256:2ece3f048a9e8ac12f77c23a195d3be380e2f9169cd94f21655b7f53a015e63a",
-  "evidenceDigest": "sha256:bf233297f17a9229eef0e9b9accda27e7b031845dcaf82e70fca13239b70f866",
-  "stylingContractDigest": "sha256:a10fecf6d43e4392312158f15b66d55a9e2bd3c7816a0747eb2084735d336de5"
+  "fixtureDigest": "sha256:e6d4a04d4d717c5c0299bbdc6aeed033e1f5945c348326537b34ce701229dcff",
+  "evidenceDigest": "sha256:a26845d431f0f7added911cf253309d0cdb72cb20ba0ef91f83b70a7057c68db",
+  "stylingContractDigest": "sha256:04abe6e0ce1e75ebfdd2549cceb66b4f4ff7aa0aeccf96ac18b300bed1f7aa0a",
+  "composition": {
+    "schemaId": "urn:gala:schema:template-composition:2.0.0",
+    "schemaVersion": "2.0.0",
+    "profile": "personal",
+    "homeLayout": "chronological",
+    "articleLayout": "prose",
+    "authorLayout": "biography",
+    "listingLayout": "dated-rows",
+    "headerLayout": "compact",
+    "footerLayout": "compact",
+    "mediaRatio": "landscape",
+    "density": "spacious"
+  }
 }

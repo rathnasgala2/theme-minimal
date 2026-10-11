@@ -1,26 +1,37 @@
 # @rathnasgala2/theme-minimal
 
 The Minimal presentation theme for Galascribe portable publications
-(`@rathnasgala2/template@^3.0.0`): monochrome, quiet, hairline rules and
+(`@rathnasgala2/template@^4.0.0`): monochrome, quiet, hairline rules and
 generous whitespace. It is used only when a publication's own
 `appearance.theme` names it; the build fallback is
 `@rathnasgala2/theme-default`. This package is a **closed, passive file
 set**: JSON and CSS only, no JavaScript, no build step, no runtime
 dependency, no lifecycle script.
 
-Since 3.0.0 the template owns page layout and component structure. This
-theme supplies design values (the 116-token contract) plus a small amount of
-skin CSS.
+In generation 4 the template owns page layout and component structure. This
+theme selects the Personal composition and supplies its established
+116-token Minimal palette plus a small amount of skin CSS.
+
+## Composition
+
+`theme.json` embeds the complete generation-4 Personal composition:
+
+- chronological home
+- prose article
+- biography author page
+- dated-row listings
+- compact header and footer
+- landscape media
+- spacious density
 
 ## Files
 
 - `package.json`: exactly `name`, `version`, `license`, `repository`, `files`.
-- `theme.json`: validated against `urn:gala:schema:theme-contract:2.0.0`
-  (schema package 3.0.0). It carries the identity, `templateRange`
-  (`^3.0.0`), the stylesheet and layer projection, the template styling hooks
-  the CSS uses (`slotHooks`), both palettes for all 116 tokens, asset
-  digests, size budgets, and `stylingContractDigest` (the template's styling
-  contract 3.0.0).
+- `theme.json`: validated against `urn:gala:schema:theme-contract:2.0.0`. It
+  carries the contract-4 identity and Personal composition,
+  `templateRange` (`^4.0.0`), the stylesheet/layer/hook projection, both
+  palettes for all 116 tokens, asset digests, size budgets, and the
+  generation-4 `stylingContractDigest`.
 - `tokens.css`: generated from `theme.json` by `tokens:generate`. Never edit
   it by hand; `tokens:check` fails if it drifts from `theme.json`.
 - `components.css`: a small skin layer (cards, chips, avatars, strong text)
@@ -43,20 +54,24 @@ gate lives in `@rathnasgala2/theme-tooling` and is reached through
 `tooling/run.mjs`.
 
 ```sh
-export GALA_THEME_TOOLING_DIR=../theme-tooling   # checkout of theme-tooling
-export GALA_TEMPLATE_DIR=../template             # checkout of the template
-npm --prefix tooling run tokens:generate         # theme.json tokens -> tokens.css
-npm --prefix tooling run digest:generate         # run twice; second run must change nothing
-npm --prefix tooling run verify
+npm --prefix ../theme-tooling run vendor:check
+npm --prefix ../theme-tooling ci
+GALA_THEME_TOOLING_DIR=../../theme-tooling npm --prefix tooling run tokens:generate
+GALA_THEME_TOOLING_DIR=../../theme-tooling npm --prefix tooling run digest:generate
+GALA_THEME_TOOLING_DIR=../../theme-tooling npm --prefix tooling run verify
 ```
 
 Re-run `digest:generate` after editing `theme.json`, `tokens.css`,
 `components.css` or `print.css`. It recomputes asset digests and the chain
 `fixtureDigest`, `evidenceDigest`, `integrity`.
 
-Neither `@rathnasgala2/template` nor `@rathnasgala2/theme-tooling` is an npm
-dependency here; both are resolved by path through the two environment
-variables above (CI checks them out at pinned commits).
+Only theme tooling is consumed from an explicit source checkout. Before
+installation, it verifies its committed Schema 3.8.0, Template 4.0.0, and six
+Theme 4.0.0 archives against `vendor/manifest.json` and the lockfile; Schema
+and Template then resolve from those integrity-checked installed archives.
+`GALA_SCHEMA_DIR` and `GALA_TEMPLATE_DIR` are development overrides, not part
+of this flow. None is a runtime dependency, and these commands do not publish
+the package.
 
 ## Rules
 
