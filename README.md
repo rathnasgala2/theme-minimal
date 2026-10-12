@@ -1,7 +1,7 @@
 # @rathnasgala2/theme-minimal
 
 The Minimal presentation theme for Galascribe portable publications
-(`@rathnasgala2/template@^4.0.0`): monochrome, quiet, hairline rules and
+(`@rathnasgala2/template@^4.1.0`): monochrome, quiet, hairline rules and
 generous whitespace. It is used only when a publication's own
 `appearance.theme` names it; the build fallback is
 `@rathnasgala2/theme-default`. This package is a **closed, passive file
@@ -29,7 +29,7 @@ theme selects the Personal composition and supplies its established
 - `package.json`: exactly `name`, `version`, `license`, `repository`, `files`.
 - `theme.json`: validated against `urn:gala:schema:theme-contract:2.0.0`. It
   carries the contract-4 identity and Personal composition,
-  `templateRange` (`^4.0.0`), the stylesheet/layer/hook projection, both
+  `templateRange` (`^4.1.0`), the stylesheet/layer/hook projection, both
   palettes for all 116 tokens, asset digests, size budgets, and the
   generation-4 `stylingContractDigest`.
 - `tokens.css`: generated from `theme.json` by `tokens:generate`. Never edit
