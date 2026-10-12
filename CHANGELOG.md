@@ -17,7 +17,7 @@ generation-3 compatibility is provided.
   4.0.0/`^4.0.0`, then regenerated the conformance digest chain.
 - Development and verification consume theme tooling from an explicit source
   checkout; it installs integrity-checked vendored Schema 3.8.0 and Template
-  4.0.0 archives. No npm publication is part of this release.
+  4.0.0 archives. The release workflow publishes it to npm with trusted-publishing provenance.
 
 ## 3.0.0 - 2026-10-10
 
