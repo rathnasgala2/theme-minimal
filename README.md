@@ -1,7 +1,7 @@
 # @rathnasgala2/theme-minimal
 
 The Minimal presentation theme for Galascribe portable publications
-(`@rathnasgala2/template@^4.1.0`): monochrome, quiet, hairline rules and
+(`@rathnasgala2/template@^4.4.0`): monochrome, quiet, hairline rules and
 generous whitespace. It is used only when a publication's own
 `appearance.theme` names it; the build fallback is
 `@rathnasgala2/theme-default`. This package is a **closed, passive file
@@ -29,7 +29,7 @@ theme selects the Personal composition and supplies its established
 - `package.json`: exactly `name`, `version`, `license`, `repository`, `files`.
 - `theme.json`: validated against `urn:gala:schema:theme-contract:2.0.0`. It
   carries the contract-4 identity and Personal composition,
-  `templateRange` (`^4.1.0`), the stylesheet/layer/hook projection, both
+  `templateRange` (`^4.4.0`), the stylesheet/layer/hook projection, both
   palettes for all 116 tokens, asset digests, size budgets, and the
   generation-4 `stylingContractDigest`.
 - `tokens.css`: generated from `theme.json` by `tokens:generate`. Never edit
@@ -65,10 +65,9 @@ Re-run `digest:generate` after editing `theme.json`, `tokens.css`,
 `components.css` or `print.css`. It recomputes asset digests and the chain
 `fixtureDigest`, `evidenceDigest`, `integrity`.
 
-Only theme tooling is consumed from an explicit source checkout. Before
-installation, it verifies its committed Schema 3.8.0, Template 4.0.0, and six
-Theme 4.0.0 archives against `vendor/manifest.json` and the lockfile; Schema
-and Template then resolve from those integrity-checked installed archives.
+Only theme tooling is consumed from an explicit source checkout. Its exact
+Schema 3.16.0 and Template 4.4.0 dev dependencies install from the npm
+registry, and Schema and Template resolve from those installed packages.
 `GALA_SCHEMA_DIR` and `GALA_TEMPLATE_DIR` are development overrides, not part
 of this flow. None is a runtime dependency, and these commands do not publish
 the package.

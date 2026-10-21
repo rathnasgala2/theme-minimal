@@ -4,6 +4,15 @@ All notable changes to `@rathnasgala2/theme-minimal` are documented here.
 
 ## Unreleased
 
+## 4.2.0 - 2026-10-21
+
+- Built against template 4.4.0 and styling contract 4.1.0 (new
+  `stylingContractDigest`; template 4.4.0 refuses contract-4.0.0 themes).
+  `contractVersion` is `4.1.0` and `templateRange` is `^4.4.0`.
+- The template's base layer styles the new footer legal links, consent
+  controls and `policy` page kind; this theme sets no new rule.
+- Gated by theme-tooling 0.7.0. No colour or token change.
+
 ## 4.1.0 - 2026-10-12
 
 - Declares a `palette` block (`gala-palette-follow-v1`): 36 tokens follow the
